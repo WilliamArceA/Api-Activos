@@ -1,5 +1,6 @@
 const {
     getActives,
+    getActivesByCategory,
     getActivesById,
     createActive,
     updateActive,
@@ -8,8 +9,24 @@ const {
 
 async function GET(req, res) {
     try {
-        const response = await getActives()
-        return res.status(200).json(response)
+        const filter = req.query.filter
+        if(filter==undefined)
+            return res.status(400).json({ msg: 'Can not get, missing data' })
+        if(filter=='Off'){
+            const response = await getActives()
+            return res.status(200).json(response)
+        }else{
+            if(filter=='On'){
+                const category = req.query.category
+                if(category=='' ||!category)
+                return res.status(400).json({ msg: 'Can not get, missing data' })
+                const response = await getActivesByCategory(category)
+                return res.status(200).json(response)
+            }else{
+                return res.status(500).json({ errorCode: error.code, msg: error.message })
+            }
+        }
+            
     } catch (error) {
         return res.status(500).json({ errorCode: error.code, msg: error.message })
     }

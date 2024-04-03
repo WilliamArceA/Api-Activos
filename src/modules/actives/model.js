@@ -9,6 +9,17 @@ async function getActives() {
     return result1
 }
 
+async function getActivesByCategory(category) {
+    let query =  `select *
+                    from(select category_id
+                        from categoria
+                        where category_name='`+category+`')as uno, activos
+                        where uno.category_id = activos.category_id and active_flag=true`
+    const dat = await pool.query(query)
+    response.datos=dat.rows
+    return response
+}
+
 async function getActivesById(active_id) {
     const dat = await pool.query(
         `select * from activos where active_id=$1`, 
@@ -47,6 +58,7 @@ async function deleteActive(active_id) {
 
 module.exports = {
     getActives,
+    getActivesByCategory,
     getActivesById,
     createActive,
     updateActive,
