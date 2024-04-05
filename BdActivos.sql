@@ -101,10 +101,11 @@ CATEGORY_ID
 /*==============================================================*/
 create table LOG_BD (
    ID_LOG               SERIAL               not null,
-   NEW_LOG              VARCHAR(50)          null,
-   OLD_LOG              VARCHAR(50)          null,
+   NEW_LOG              VARCHAR(500)          null,
+   OLD_LOG              VARCHAR(500)          null,
    TYPE                 VARCHAR(20)          not null,
    "TABLE"              VARCHAR(10)          not null,
+   "DATE"                 DATE                 not null,
    constraint PK_LOG_BD primary key (ID_LOG)
 );
 
@@ -374,7 +375,46 @@ VALUES (10, 7, 1, 2, '2024-01-06', 'Compra de carpetas para la nueva gestion', t
 INSERT INTO movimiento(move_id, active_id, old_location_id, new_location_id, move_date, move_detail, move_flag)
 VALUES (11, 8, 1, 3, '2024-01-07', 'Renovacion de engrampadoras para el departamento', true);
 
+CREATE OR REPLACE FUNCTION insertar_log()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF (TG_OP = 'INSERT') THEN
+        INSERT INTO log_bd (new_log, type, "TABLE", "DATE") 
+        VALUES (to_json(NEW)::varchar(500), 'INSERT', TG_TABLE_NAME, CURRENT_DATE);
+    ELSIF (TG_OP = 'UPDATE') THEN
+        INSERT INTO log_bd (new_log, old_log, type, "TABLE", "DATE") 
+        VALUES (to_json(NEW)::varchar(500), to_json(OLD)::varchar(500), 'UPDATE', TG_TABLE_NAME, CURRENT_DATE);
+    ELSIF (TG_OP = 'DELETE') THEN
+        INSERT INTO log_bd (old_log, type, "TABLE", "DATE") 
+        VALUES (to_json(OLD)::varchar(500), 'DELETE', TG_TABLE_NAME, CURRENT_DATE);
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
+CREATE TRIGGER trigger_log_category
+AFTER INSERT OR UPDATE OR DELETE ON categoria
+FOR EACH ROW EXECUTE FUNCTION insertar_log();
+
+CREATE TRIGGER trigger_log_user
+AFTER INSERT OR UPDATE OR DELETE ON usuario
+FOR EACH ROW EXECUTE FUNCTION insertar_log();
+
+CREATE TRIGGER trigger_log_role
+AFTER INSERT OR UPDATE OR DELETE ON rol
+FOR EACH ROW EXECUTE FUNCTION insertar_log();
+
+CREATE TRIGGER trigger_log_location
+AFTER INSERT OR UPDATE OR DELETE ON ubicacion
+FOR EACH ROW EXECUTE FUNCTION insertar_log();
+
+CREATE TRIGGER trigger_log_active
+AFTER INSERT OR UPDATE OR DELETE ON activos
+FOR EACH ROW EXECUTE FUNCTION insertar_log();
+
+CREATE TRIGGER trigger_log_movement
+AFTER INSERT OR UPDATE OR DELETE ON movimiento
+FOR EACH ROW EXECUTE FUNCTION insertar_log();
 
 
 
