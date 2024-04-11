@@ -13,7 +13,9 @@
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
     "express": "^4.17.1",
-    "pg": "^8.4.1"
+    "pg": "^8.4.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
     "mocha": "^10.4.0",
@@ -22,7 +24,6 @@
     "supertest": "^5.0.0"
   },
   "keywords": [],
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WilliamArceA/Api-Activos.git"
@@ -33,5 +34,4 @@
     "url": "https://github.com/WilliamArceA/Api-Activos/issues"
   },
   "homepage": "https://github.com/WilliamArceA/Api-Activos#readme"
-  
 }
