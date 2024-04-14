@@ -18,18 +18,18 @@ async function getLocationById(loc_id) {
     return response.datos
 }
 
-async function createLocation(name,detail) {
+async function createLocation(location_name,location_detail) {
     const response = await pool.query(
         `INSERT INTO ubicacion(location_name, location_detail, location_flag) VALUES ($1,$2, true);`,
-        [name,detail]
+        [location_name,location_detail]
     )
     return response.command
 }
 
-async function updateLocation(loc_id, name, detail) {
+async function updateLocation(loc_id, location_name, location_detail) {
     const response = await pool.query(
         `UPDATE ubicacion SET location_name=$2, location_detail=$3 WHERE location_id=$1;`, 
-    [loc_id,name,detail]
+    [loc_id,location_name,location_detail]
     )
     return response.command
 }

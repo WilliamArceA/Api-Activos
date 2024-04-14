@@ -25,12 +25,14 @@ const {
  *     parameters:
  *       - in: query
  *         name: filter
+ *         required: true
  *         description: Filtrar activos por estado, si se coloca "Off" el valor category no debe introducirse.
  *         schema:
  *           type: string
  *           enum: [On, Off]
  *       - in: query
  *         name: category
+ *         required: false
  *         description: Filtrar activos por categoría, solo introducir un valor si filter esta en "On".
  *         schema:
  *           type: string
