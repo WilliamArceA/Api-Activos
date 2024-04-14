@@ -36,14 +36,14 @@ async function getMovementsById(move_id) {
     return response.datos
 }
 
-async function createMovement(active_name, old_location, new_location, date, detail) {
+async function createMovement(active_name, old_location, new_location, move_date, detail) {
     const response = await pool.query(
         `INSERT INTO movimiento(active_id, old_location_id, new_location_id, move_date, move_detail, move_flag)
         VALUES ((select active_id from activos where active_name=$1), 
                 (select location_id from ubicacion where location_name=$2), 
                 (select location_id from ubicacion where location_name=$3), 
                 $4, $5, true);`,
-        [active_name,old_location,new_location,date, detail]
+        [active_name,old_location,new_location,move_date, detail]
     )
     return response.command
 }
