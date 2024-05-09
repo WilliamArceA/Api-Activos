@@ -77,7 +77,7 @@ async function GET(req, res) {
  *   post:
  *     tags: [UserPerRole]
  *     summary: Crear relación entre usuario y rol.
- *     description: Crea una relación entre un usuario y un rol.
+ *     description: Crea una relación entre un usuario y un rol. Se deben ingresar nombres de usuarios y roles existentes.
  *     requestBody:
  *       required: true
  *       content:
@@ -120,12 +120,12 @@ async function POST(req, res) {
  *   put:
  *     tags: [UserPerRole]
  *     summary: Actualizar rol de un usuario.
- *     description: Actualiza el rol de un usuario especificado por su ID.
+ *     description: Actualiza el rol de un usuario especificado por su ID. Se deben ingresar nombres de roles existentes.
  *     parameters:
  *       - in: path
  *         name: user-id
  *         required: true
- *         description: ID del usuario.
+ *         description: ID del usuario del cual se actualizara sus roles.
  *         schema:
  *           type: string
  *     requestBody:
@@ -171,7 +171,7 @@ async function PUT(req, res) {
  *   delete:
  *     tags: [UserPerRole]
  *     summary: Eliminar relación entre usuario y rol.
- *     description: Elimina la relación entre un usuario y un rol especificado por su ID.
+ *     description: Cambia el flag de un usuario y su rol y este deja de ser visible por metodos tradicionales.
  *     parameters:
  *       - in: path
  *         name: user-id

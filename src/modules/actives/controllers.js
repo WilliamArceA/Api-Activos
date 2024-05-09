@@ -33,10 +33,9 @@ const {
  *       - in: query
  *         name: category
  *         required: false
- *         description: Filtrar activos por categoría, solo introducir un valor si filter esta en "On".
+ *         description: Filtrar activos por el nombre categoría, solo introducir un valor si filter esta en "On".
  *         schema:
  *           type: string
- *           enum: [Vehiculos, Equipos informaticos, Inmuebles, Material de escritorio]
  *     responses:
  *       '200':
  *         description: Operación exitosa

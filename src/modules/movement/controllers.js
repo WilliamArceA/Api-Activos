@@ -82,8 +82,8 @@ async function GET(req, res) {
  * /movement/{id}:
  *   get:
  *     tags: [Movements]
- *     summary: Obtener un movimiento por su ID
- *     description: Retorna un movimiento específico según su ID.
+ *     summary: Obtener un movimiento de un activo especifico por su ID
+ *     description: Retorna un movimiento de un activo específico según su ID.
  *     parameters:
  *       - in: path
  *         name: id
@@ -114,8 +114,8 @@ async function SHOW(req, res) {
  * /movement:
  *   post:
  *     tags: [Movements]
- *     summary: Crear un nuevo movimiento.
- *     description: Crea un nuevo movimiento con los detalles proporcionados.
+ *     summary: Crear un nuevo movimiento de un activo.
+ *     description: Crea un nuevo movimiento de un activo con los detalles proporcionados.
  *     requestBody:
  *       required: true
  *       content:
@@ -136,6 +136,7 @@ async function SHOW(req, res) {
  *                 type: string
  *                 format: date
  *                 description: Fecha del movimiento, debe serguir el formato 'yyyy-mm-dd'.
+ *                 example: "yyyy-mm-dd"
  *               detail:
  *                 type: string
  *                 description: Detalle del movimiento.
@@ -168,7 +169,7 @@ async function POST(req, res) {
  * /movement/{id}:
  *   put:
  *     tags: [Movements]
- *     summary: Actualizar un movimiento existente
+ *     summary: Actualizar un movimiento de un activo existente
  *     description: Actualiza los detalles de un movimiento específico identificado por su ID.
  *     parameters:
  *       - in: path
