@@ -77,7 +77,7 @@ async function GET(req, res) {
  *   post:
  *     tags: [UserPerLocation]
  *     summary: Crear una relación entre un usuario y una ubicación.
- *     description: Crea una nueva relación entre un usuario y una ubicación especificada.
+ *     description: Crea una nueva relación entre un usuario y una ubicación especificada. Se deben ingresar nombres de usuarios y ubicaciones existentes.
  *     requestBody:
  *       required: true
  *       content:
@@ -124,12 +124,12 @@ async function POST(req, res) {
  *   put:
  *     tags: [UserPerLocation]
  *     summary: Actualizar ubicación de un usuario.
- *     description: Actualiza la ubicación de un usuario especificado por su ID.
+ *     description: Actualiza la ubicación de un usuario especificado por su ID. Se deben ingresar nombres de ubicaciones existentes.
  *     parameters:
  *       - in: path
  *         name: user-id
  *         required: true
- *         description: ID del usuario.
+ *         description: ID del usuario del cual se actualizara su ubicacion.
  *         schema:
  *           type: string
  *     requestBody:
@@ -180,7 +180,7 @@ async function PUT(req, res) {
  *   delete:
  *     tags: [UserPerLocation]
  *     summary: Eliminar la relación entre un usuario y una ubicación.
- *     description: Elimina la relación entre un usuario y una ubicación especificada por su ID.
+ *     description: Cambia el flag de un usuario y su ubicacion y este deja de ser visible por metodos tradicionales.
  *     parameters:
  *       - in: path
  *         name: user-id
