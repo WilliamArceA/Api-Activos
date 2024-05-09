@@ -5,6 +5,8 @@ const users =require('./users')
 const roles = require('./roles')
 const movement = require('./movement')
 const log = require('./log')
+const userPerLocation = require('./userPerLocation')
+const userPerRole = require('./userPerRole')
 
 function router(app){
     app.use(categories)
@@ -14,6 +16,8 @@ function router(app){
     app.use(roles)
     app.use(movement)
     app.use(log)
+    app.use(userPerLocation)
+    app.use(userPerRole)
 }
 
 module.exports = router

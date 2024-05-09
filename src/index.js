@@ -5,7 +5,7 @@ const swaggerUi = require('swagger-ui-express');
 const modules = require('./modules')
 const morgan = require('morgan')
 const swaggerOptions = require('./swaggerOptions')
-const swaggerEndpoint = '/api-docs'
+const swaggerEndpoint = '/swagger'
 
 const port = process.env.PORT || 4000
 const app = express()
